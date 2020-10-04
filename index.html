@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spotify API</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <form action="">
+        <input type="hidden" id="hidden_token" />
+        <div class="col-sm-10 form-group row mt-4 px-0">
+          <label for="Genre" class="form-label col-sm-2">Genre:</label>
+          <select name="" id="select_genre" class="form-control form-control-sm col-sm-10">
+            <option>Select...</option>
+          </select>
+        </div>
+        <div class="col-sm-10 form-group row px-0">
+          <label for="Genre" class="form-label col-sm-2">Playlists:</label>
+          <select name="" id="select_playlist" class="form-control form-control-sm col-sm-10">
+            <option>Select...</option>
+          </select>
+        </div>
+        <div class="col-sm-6 row form-group px-0">
+          <button type="submit" id="btn_submit" class="btn btn-success col-sm-12">Search</button>
+        </div>
+      </form>
+
+      <div class="row">
+        <div class="col-sm-6 px-0">
+          <div class="list-group">
+            <a href="#" class="list-group-item list-group-item-action list-group-item-light">
+              Song 1
+            </a>
+          </div>
+          <div class="list-group">
+            <a href="#" class="list-group-item list-group-item-action list-group-item-light">
+              Song 2
+            </a>
+          </div>
+        </div>
+        <div class="offset-md-1 col-sm-4" id="song-detail">
+          <div class="row col-sm-32 px-0">
+            <img src="testImage.jpg" alt="" />
+          </div>
+          <div class="row col-sm-32 px-0">
+            <label for="Genre" class="form-label col-sm-12">Song Title</label>
+          </div>
+          <div class="row col-sm-32 px-0">
+            <label for="Artist" class="form-label col-sm-12">By xxxx</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+    <script src="app.js"></script>
+  </body>
+</html>
