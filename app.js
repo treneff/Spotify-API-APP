@@ -2,11 +2,13 @@ const APIController = (() => {
   const clientId = 'f48d7b6b0fa74518a36b6c914621b89c';
   const clientSecret = '50ac38c0efb3445ca8fd1ed3628d734f';
 
+  //token request post
   return {
     getToken: async () => {
       const result = await fetch('https://accounts.spotify.com/api/token', {
         method: 'POST',
         headers: {
+          ///base 64 encoding
           'Content-Type': 'application/x-www-form-urlencoded',
           Authorization: 'Basic ' + btoa(clientId + ':' + clientSecret),
         },
@@ -28,7 +30,7 @@ const APIController = (() => {
     },
 
     getPlaylistByGenre: async (token, genreId) => {
-      const limit = 10;
+      const limit = 5;
 
       const result = await fetch(
         `https://api.spotify.com/v1/browse/categories/${genreId}/playlists?limit=${limit}`,
@@ -43,7 +45,7 @@ const APIController = (() => {
     },
 
     getTracks: async (token, tracksEndPoint) => {
-      const limit = 10;
+      const limit = 5;
 
       const result = await fetch(`${tracksEndPoint}?limit=${limit}`, {
         method: 'GET',
@@ -70,11 +72,11 @@ const APIController = (() => {
 const UIController = (() => {
   //references to HTML selectors
   const DOMStrings = {
-    selectGenre: '#select_genre',
-    selectPlaylist: '#select_playlist',
-    submitBtn: '#btn_submit',
+    selectGenre: '#select-genre',
+    selectPlaylist: '#select-playlist',
+    submitBtn: '#btn-submit',
     divSongDetail: '#song-detail',
-    hfToken: '#hidden_token',
+    hiddenToken: '#hidden-token',
     divSonglist: '.song-list',
   };
 
@@ -147,12 +149,12 @@ const UIController = (() => {
     },
 
     storeToken: (value) => {
-      document.querySelector(DOMStrings.hfToken).value = value;
+      document.querySelector(DOMStrings.hiddenToken).value = value;
     },
 
     getStoredToken: () => {
       return {
-        token: document.querySelector(DOMStrings.hfToken).value,
+        token: document.querySelector(DOMStrings.hiddenToken).value,
       };
     },
   };
@@ -190,7 +192,7 @@ const controller = ((UICtrl, APICtrl) => {
     playlist.forEach((p) => UICtrl.createPlaylist(p.name, p.tracks.href));
   });
 
-  // create submit button click event listener
+  //Submit button click event listener
   input.submit.addEventListener('click', async (event) => {
     // prevent page reset
     event.preventDefault();
@@ -208,16 +210,13 @@ const controller = ((UICtrl, APICtrl) => {
     tracks.forEach((element) => UICtrl.createTrack(element.track.href, element.track.name));
   });
 
-  // create song selection click event listener
+  // Song Selection event listener
   input.tracks.addEventListener('click', async (event) => {
-    // prevent page reset
     event.preventDefault();
     UICtrl.resetTrackDetail();
-    // get the token
+    // get the token and track end point
     const token = UICtrl.getStoredToken().token;
-    // get the track endpoint
     const trackEndpoint = event.target.id;
-    //get the track object
     const track = await APICtrl.getTrack(token, trackEndpoint);
     // load the track details
     UICtrl.createTrackDetail(track.album.images[2].url, track.name, track.artists[0].name);
@@ -233,5 +232,4 @@ const controller = ((UICtrl, APICtrl) => {
   };
 })(UIController, APIController);
 
-// will need to call a method to load the genres on page load
 controller.init();
