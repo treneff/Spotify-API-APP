@@ -5,7 +5,7 @@ const APIController = (() => {
   //token request post
   return {
     getToken: async () => {
-      const result = await fetch('https://accounts.spotify.com/api/token', {
+      const response = await fetch('https://accounts.spotify.com/api/token', {
         method: 'POST',
         headers: {
           ///base 64 encoding
@@ -15,24 +15,24 @@ const APIController = (() => {
         body: 'grant_type=client_credentials',
       });
 
-      const data = await result.json();
+      const data = await response.json();
       return data.access_token;
     },
 
     getGenres: async (token) => {
-      const result = await fetch(`https://api.spotify.com/v1/browse/categories?locale=sv_GB`, {
+      const response = await fetch(`https://api.spotify.com/v1/browse/categories?locale=sv_GB`, {
         method: 'GET',
         headers: { Authorization: 'Bearer ' + token },
       });
 
-      const data = await result.json();
+      const data = await response.json();
       return data.categories.items;
     },
 
     getPlaylistByGenre: async (token, genreId) => {
       const limit = 5;
 
-      const result = await fetch(
+      const response = await fetch(
         `https://api.spotify.com/v1/browse/categories/${genreId}/playlists?limit=${limit}`,
         {
           method: 'GET',
@@ -40,29 +40,29 @@ const APIController = (() => {
         }
       );
 
-      const data = await result.json();
+      const data = await response.json();
       return data.playlists.items;
     },
 
     getTracks: async (token, tracksEndPoint) => {
       const limit = 5;
 
-      const result = await fetch(`${tracksEndPoint}?limit=${limit}`, {
+      const response = await fetch(`${tracksEndPoint}?limit=${limit}`, {
         method: 'GET',
         headers: { Authorization: 'Bearer ' + token },
       });
 
-      const data = await result.json();
+      const data = await response.json();
       return data.items;
     },
 
     getTrack: async (token, trackEndPoint) => {
-      const result = await fetch(`${trackEndPoint}`, {
+      const response = await fetch(`${trackEndPoint}`, {
         method: 'GET',
         headers: { Authorization: 'Bearer ' + token },
       });
 
-      const data = await result.json();
+      const data = await response.json();
       return data;
     },
   };
