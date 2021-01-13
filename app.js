@@ -1,6 +1,6 @@
 const APIController = (() => {
-  const clientId = 'ClientID';
-  const clientSecret = 'ClientSecret';
+  const clientId = 'f48d7b6b0fa74518a36b6c914621b89c';
+  const clientSecret = '50ac38c0efb3445ca8fd1ed3628d734f';
 
   //token request post
   return {
